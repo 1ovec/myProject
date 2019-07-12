@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hd.mapper.StopTaskinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hd.pojo.StopTaskinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="batch_id" property="batchId" jdbcType="INTEGER" />
+    <result column="agent_name" property="agentName" jdbcType="VARCHAR" />
+    <result column="task_batch_id" property="taskBatchId" jdbcType="INTEGER" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="marketing_team" property="marketingTeam" jdbcType="INTEGER" />
+    <result column="count_out_call_user" property="countOutCallUser" jdbcType="INTEGER" />
+    <result column="task_count" property="taskCount" jdbcType="INTEGER" />
+    <result column="invalid_count" property="invalidCount" jdbcType="INTEGER" />
+    <result column="valid_count" property="validCount" jdbcType="INTEGER" />
+    <result column="stop_count" property="stopCount" jdbcType="INTEGER" />
+    <result column="task_status" property="taskStatus" jdbcType="INTEGER" />
+    <result column="call_num_count" property="callNumCount" jdbcType="INTEGER" />
+    <result column="count_data_pool" property="countDataPool" jdbcType="INTEGER" />
+    <result column="cout_call" property="coutCall" jdbcType="INTEGER" />
+    <result column="cout_succeed_call" property="coutSucceedCall" jdbcType="INTEGER" />
+    <result column="cout_succeed_call_rate" property="coutSucceedCallRate" jdbcType="VARCHAR" />
+    <result column="out_call_count" property="outCallCount" jdbcType="INTEGER" />
+    <result column="Succeedout_call_count" property="succeedoutCallCount" jdbcType="INTEGER" />
+    <result column="get_call_rate" property="getCallRate" jdbcType="VARCHAR" />
+    <result column="Contact_rate" property="contactRate" jdbcType="VARCHAR" />
+    <result column="count_intention_order_num" property="countIntentionOrderNum" jdbcType="INTEGER" />
+    <result column="count_order_num" property="countOrderNum" jdbcType="INTEGER" />
+    <result column="OnSucces_rate" property="onsuccesRate" jdbcType="VARCHAR" />
+    <result column="query_order_quantity" property="queryOrderQuantity" jdbcType="INTEGER" />
+    <result column="Billing_schedule" property="billingSchedule" jdbcType="VARCHAR" />
+    <result column="query_order_actual_success" property="queryOrderActualSuccess" jdbcType="INTEGER" />
+    <result column="query_order_amount_success" property="queryOrderAmountSuccess" jdbcType="INTEGER" />
+    <result column="query_order_amount_failing" property="queryOrderAmountFailing" jdbcType="INTEGER" />
+    <result column="Success_rate_of_billing" property="successRateOfBilling" jdbcType="VARCHAR" />
+    <result column="count_qc_status" property="countQcStatus" jdbcType="INTEGER" />
+    <result column="count_true_qc_status" property="countTrueQcStatus" jdbcType="INTEGER" />
+    <result column="inspection_rate" property="inspectionRate" jdbcType="VARCHAR" />
+    <result column="query_two_qc_status" property="queryTwoQcStatus" jdbcType="INTEGER" />
+    <result column="query_true_two_qc_status" property="queryTrueTwoQcStatus" jdbcType="INTEGER" />
+    <result column="inspection2_rate" property="inspection2Rate" jdbcType="VARCHAR" />
+    <result column="task_type_name" property="taskTypeName" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_id, batch_id, agent_name, task_batch_id, task_name, name, city_name, marketing_team, 
+    count_out_call_user, task_count, invalid_count, valid_count, stop_count, task_status, 
+    call_num_count, count_data_pool, cout_call, cout_succeed_call, cout_succeed_call_rate, 
+    out_call_count, Succeedout_call_count, get_call_rate, Contact_rate, count_intention_order_num, 
+    count_order_num, OnSucces_rate, query_order_quantity, Billing_schedule, query_order_actual_success, 
+    query_order_amount_success, query_order_amount_failing, Success_rate_of_billing, 
+    count_qc_status, count_true_qc_status, inspection_rate, query_two_qc_status, query_true_two_qc_status, 
+    inspection2_rate, task_type_name, type_name, ctime, data_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hd.pojo.StopTaskinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stop_taskinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stop_taskinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stop_taskinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hd.pojo.StopTaskinfoExample" >
+    delete from stop_taskinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hd.pojo.StopTaskinfo" >
+    insert into stop_taskinfo (id, task_id, batch_id, 
+      agent_name, task_batch_id, task_name, 
+      name, city_name, marketing_team, 
+      count_out_call_user, task_count, invalid_count, 
+      valid_count, stop_count, task_status, 
+      call_num_count, count_data_pool, cout_call, 
+      cout_succeed_call, cout_succeed_call_rate, out_call_count, 
+      Succeedout_call_count, get_call_rate, Contact_rate, 
+      count_intention_order_num, count_order_num, 
+      OnSucces_rate, query_order_quantity, Billing_schedule, 
+      query_order_actual_success, query_order_amount_success, 
+      query_order_amount_failing, Success_rate_of_billing, 
+      count_qc_status, count_true_qc_status, inspection_rate, 
+      query_two_qc_status, query_true_two_qc_status, 
+      inspection2_rate, task_type_name, type_name, 
+      ctime, data_time)
+    values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{batchId,jdbcType=INTEGER}, 
+      #{agentName,jdbcType=VARCHAR}, #{taskBatchId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{marketingTeam,jdbcType=INTEGER}, 
+      #{countOutCallUser,jdbcType=INTEGER}, #{taskCount,jdbcType=INTEGER}, #{invalidCount,jdbcType=INTEGER}, 
+      #{validCount,jdbcType=INTEGER}, #{stopCount,jdbcType=INTEGER}, #{taskStatus,jdbcType=INTEGER}, 
+      #{callNumCount,jdbcType=INTEGER}, #{countDataPool,jdbcType=INTEGER}, #{coutCall,jdbcType=INTEGER}, 
+      #{coutSucceedCall,jdbcType=INTEGER}, #{coutSucceedCallRate,jdbcType=VARCHAR}, #{outCallCount,jdbcType=INTEGER}, 
+      #{succeedoutCallCount,jdbcType=INTEGER}, #{getCallRate,jdbcType=VARCHAR}, #{contactRate,jdbcType=VARCHAR}, 
+      #{countIntentionOrderNum,jdbcType=INTEGER}, #{countOrderNum,jdbcType=INTEGER}, 
+      #{onsuccesRate,jdbcType=VARCHAR}, #{queryOrderQuantity,jdbcType=INTEGER}, #{billingSchedule,jdbcType=VARCHAR}, 
+      #{queryOrderActualSuccess,jdbcType=INTEGER}, #{queryOrderAmountSuccess,jdbcType=INTEGER}, 
+      #{queryOrderAmountFailing,jdbcType=INTEGER}, #{successRateOfBilling,jdbcType=VARCHAR}, 
+      #{countQcStatus,jdbcType=INTEGER}, #{countTrueQcStatus,jdbcType=INTEGER}, #{inspectionRate,jdbcType=VARCHAR}, 
+      #{queryTwoQcStatus,jdbcType=INTEGER}, #{queryTrueTwoQcStatus,jdbcType=INTEGER}, 
+      #{inspection2Rate,jdbcType=VARCHAR}, #{taskTypeName,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{dataTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hd.pojo.StopTaskinfo" >
+    insert into stop_taskinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="batchId != null" >
+        batch_id,
+      </if>
+      <if test="agentName != null" >
+        agent_name,
+      </if>
+      <if test="taskBatchId != null" >
+        task_batch_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="marketingTeam != null" >
+        marketing_team,
+      </if>
+      <if test="countOutCallUser != null" >
+        count_out_call_user,
+      </if>
+      <if test="taskCount != null" >
+        task_count,
+      </if>
+      <if test="invalidCount != null" >
+        invalid_count,
+      </if>
+      <if test="validCount != null" >
+        valid_count,
+      </if>
+      <if test="stopCount != null" >
+        stop_count,
+      </if>
+      <if test="taskStatus != null" >
+        task_status,
+      </if>
+      <if test="callNumCount != null" >
+        call_num_count,
+      </if>
+      <if test="countDataPool != null" >
+        count_data_pool,
+      </if>
+      <if test="coutCall != null" >
+        cout_call,
+      </if>
+      <if test="coutSucceedCall != null" >
+        cout_succeed_call,
+      </if>
+      <if test="coutSucceedCallRate != null" >
+        cout_succeed_call_rate,
+      </if>
+      <if test="outCallCount != null" >
+        out_call_count,
+      </if>
+      <if test="succeedoutCallCount != null" >
+        Succeedout_call_count,
+      </if>
+      <if test="getCallRate != null" >
+        get_call_rate,
+      </if>
+      <if test="contactRate != null" >
+        Contact_rate,
+      </if>
+      <if test="countIntentionOrderNum != null" >
+        count_intention_order_num,
+      </if>
+      <if test="countOrderNum != null" >
+        count_order_num,
+      </if>
+      <if test="onsuccesRate != null" >
+        OnSucces_rate,
+      </if>
+      <if test="queryOrderQuantity != null" >
+        query_order_quantity,
+      </if>
+      <if test="billingSchedule != null" >
+        Billing_schedule,
+      </if>
+      <if test="queryOrderActualSuccess != null" >
+        query_order_actual_success,
+      </if>
+      <if test="queryOrderAmountSuccess != null" >
+        query_order_amount_success,
+      </if>
+      <if test="queryOrderAmountFailing != null" >
+        query_order_amount_failing,
+      </if>
+      <if test="successRateOfBilling != null" >
+        Success_rate_of_billing,
+      </if>
+      <if test="countQcStatus != null" >
+        count_qc_status,
+      </if>
+      <if test="countTrueQcStatus != null" >
+        count_true_qc_status,
+      </if>
+      <if test="inspectionRate != null" >
+        inspection_rate,
+      </if>
+      <if test="queryTwoQcStatus != null" >
+        query_two_qc_status,
+      </if>
+      <if test="queryTrueTwoQcStatus != null" >
+        query_true_two_qc_status,
+      </if>
+      <if test="inspection2Rate != null" >
+        inspection2_rate,
+      </if>
+      <if test="taskTypeName != null" >
+        task_type_name,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="dataTime != null" >
+        data_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=INTEGER},
+      </if>
+      <if test="agentName != null" >
+        #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskBatchId != null" >
+        #{taskBatchId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingTeam != null" >
+        #{marketingTeam,jdbcType=INTEGER},
+      </if>
+      <if test="countOutCallUser != null" >
+        #{countOutCallUser,jdbcType=INTEGER},
+      </if>
+      <if test="taskCount != null" >
+        #{taskCount,jdbcType=INTEGER},
+      </if>
+      <if test="invalidCount != null" >
+        #{invalidCount,jdbcType=INTEGER},
+      </if>
+      <if test="validCount != null" >
+        #{validCount,jdbcType=INTEGER},
+      </if>
+      <if test="stopCount != null" >
+        #{stopCount,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null" >
+        #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="callNumCount != null" >
+        #{callNumCount,jdbcType=INTEGER},
+      </if>
+      <if test="countDataPool != null" >
+        #{countDataPool,jdbcType=INTEGER},
+      </if>
+      <if test="coutCall != null" >
+        #{coutCall,jdbcType=INTEGER},
+      </if>
+      <if test="coutSucceedCall != null" >
+        #{coutSucceedCall,jdbcType=INTEGER},
+      </if>
+      <if test="coutSucceedCallRate != null" >
+        #{coutSucceedCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="outCallCount != null" >
+        #{outCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succeedoutCallCount != null" >
+        #{succeedoutCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="getCallRate != null" >
+        #{getCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="contactRate != null" >
+        #{contactRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countIntentionOrderNum != null" >
+        #{countIntentionOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="countOrderNum != null" >
+        #{countOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="onsuccesRate != null" >
+        #{onsuccesRate,jdbcType=VARCHAR},
+      </if>
+      <if test="queryOrderQuantity != null" >
+        #{queryOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="billingSchedule != null" >
+        #{billingSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="queryOrderActualSuccess != null" >
+        #{queryOrderActualSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="queryOrderAmountSuccess != null" >
+        #{queryOrderAmountSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="queryOrderAmountFailing != null" >
+        #{queryOrderAmountFailing,jdbcType=INTEGER},
+      </if>
+      <if test="successRateOfBilling != null" >
+        #{successRateOfBilling,jdbcType=VARCHAR},
+      </if>
+      <if test="countQcStatus != null" >
+        #{countQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="countTrueQcStatus != null" >
+        #{countTrueQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inspectionRate != null" >
+        #{inspectionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="queryTwoQcStatus != null" >
+        #{queryTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="queryTrueTwoQcStatus != null" >
+        #{queryTrueTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inspection2Rate != null" >
+        #{inspection2Rate,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTypeName != null" >
+        #{taskTypeName,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataTime != null" >
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hd.pojo.StopTaskinfoExample" resultType="java.lang.Integer" >
+    select count(*) from stop_taskinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stop_taskinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null" >
+        batch_id = #{record.batchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentName != null" >
+        agent_name = #{record.agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskBatchId != null" >
+        task_batch_id = #{record.taskBatchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskName != null" >
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null" >
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketingTeam != null" >
+        marketing_team = #{record.marketingTeam,jdbcType=INTEGER},
+      </if>
+      <if test="record.countOutCallUser != null" >
+        count_out_call_user = #{record.countOutCallUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskCount != null" >
+        task_count = #{record.taskCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.invalidCount != null" >
+        invalid_count = #{record.invalidCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.validCount != null" >
+        valid_count = #{record.validCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stopCount != null" >
+        stop_count = #{record.stopCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskStatus != null" >
+        task_status = #{record.taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.callNumCount != null" >
+        call_num_count = #{record.callNumCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.countDataPool != null" >
+        count_data_pool = #{record.countDataPool,jdbcType=INTEGER},
+      </if>
+      <if test="record.coutCall != null" >
+        cout_call = #{record.coutCall,jdbcType=INTEGER},
+      </if>
+      <if test="record.coutSucceedCall != null" >
+        cout_succeed_call = #{record.coutSucceedCall,jdbcType=INTEGER},
+      </if>
+      <if test="record.coutSucceedCallRate != null" >
+        cout_succeed_call_rate = #{record.coutSucceedCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outCallCount != null" >
+        out_call_count = #{record.outCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succeedoutCallCount != null" >
+        Succeedout_call_count = #{record.succeedoutCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.getCallRate != null" >
+        get_call_rate = #{record.getCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactRate != null" >
+        Contact_rate = #{record.contactRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countIntentionOrderNum != null" >
+        count_intention_order_num = #{record.countIntentionOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.countOrderNum != null" >
+        count_order_num = #{record.countOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.onsuccesRate != null" >
+        OnSucces_rate = #{record.onsuccesRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queryOrderQuantity != null" >
+        query_order_quantity = #{record.queryOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.billingSchedule != null" >
+        Billing_schedule = #{record.billingSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queryOrderActualSuccess != null" >
+        query_order_actual_success = #{record.queryOrderActualSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryOrderAmountSuccess != null" >
+        query_order_amount_success = #{record.queryOrderAmountSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryOrderAmountFailing != null" >
+        query_order_amount_failing = #{record.queryOrderAmountFailing,jdbcType=INTEGER},
+      </if>
+      <if test="record.successRateOfBilling != null" >
+        Success_rate_of_billing = #{record.successRateOfBilling,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countQcStatus != null" >
+        count_qc_status = #{record.countQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.countTrueQcStatus != null" >
+        count_true_qc_status = #{record.countTrueQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.inspectionRate != null" >
+        inspection_rate = #{record.inspectionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queryTwoQcStatus != null" >
+        query_two_qc_status = #{record.queryTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.queryTrueTwoQcStatus != null" >
+        query_true_two_qc_status = #{record.queryTrueTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.inspection2Rate != null" >
+        inspection2_rate = #{record.inspection2Rate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskTypeName != null" >
+        task_type_name = #{record.taskTypeName,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeName != null" >
+        type_name = #{record.typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataTime != null" >
+        data_time = #{record.dataTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stop_taskinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      task_id = #{record.taskId,jdbcType=INTEGER},
+      batch_id = #{record.batchId,jdbcType=INTEGER},
+      agent_name = #{record.agentName,jdbcType=VARCHAR},
+      task_batch_id = #{record.taskBatchId,jdbcType=INTEGER},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
+      marketing_team = #{record.marketingTeam,jdbcType=INTEGER},
+      count_out_call_user = #{record.countOutCallUser,jdbcType=INTEGER},
+      task_count = #{record.taskCount,jdbcType=INTEGER},
+      invalid_count = #{record.invalidCount,jdbcType=INTEGER},
+      valid_count = #{record.validCount,jdbcType=INTEGER},
+      stop_count = #{record.stopCount,jdbcType=INTEGER},
+      task_status = #{record.taskStatus,jdbcType=INTEGER},
+      call_num_count = #{record.callNumCount,jdbcType=INTEGER},
+      count_data_pool = #{record.countDataPool,jdbcType=INTEGER},
+      cout_call = #{record.coutCall,jdbcType=INTEGER},
+      cout_succeed_call = #{record.coutSucceedCall,jdbcType=INTEGER},
+      cout_succeed_call_rate = #{record.coutSucceedCallRate,jdbcType=VARCHAR},
+      out_call_count = #{record.outCallCount,jdbcType=INTEGER},
+      Succeedout_call_count = #{record.succeedoutCallCount,jdbcType=INTEGER},
+      get_call_rate = #{record.getCallRate,jdbcType=VARCHAR},
+      Contact_rate = #{record.contactRate,jdbcType=VARCHAR},
+      count_intention_order_num = #{record.countIntentionOrderNum,jdbcType=INTEGER},
+      count_order_num = #{record.countOrderNum,jdbcType=INTEGER},
+      OnSucces_rate = #{record.onsuccesRate,jdbcType=VARCHAR},
+      query_order_quantity = #{record.queryOrderQuantity,jdbcType=INTEGER},
+      Billing_schedule = #{record.billingSchedule,jdbcType=VARCHAR},
+      query_order_actual_success = #{record.queryOrderActualSuccess,jdbcType=INTEGER},
+      query_order_amount_success = #{record.queryOrderAmountSuccess,jdbcType=INTEGER},
+      query_order_amount_failing = #{record.queryOrderAmountFailing,jdbcType=INTEGER},
+      Success_rate_of_billing = #{record.successRateOfBilling,jdbcType=VARCHAR},
+      count_qc_status = #{record.countQcStatus,jdbcType=INTEGER},
+      count_true_qc_status = #{record.countTrueQcStatus,jdbcType=INTEGER},
+      inspection_rate = #{record.inspectionRate,jdbcType=VARCHAR},
+      query_two_qc_status = #{record.queryTwoQcStatus,jdbcType=INTEGER},
+      query_true_two_qc_status = #{record.queryTrueTwoQcStatus,jdbcType=INTEGER},
+      inspection2_rate = #{record.inspection2Rate,jdbcType=VARCHAR},
+      task_type_name = #{record.taskTypeName,jdbcType=INTEGER},
+      type_name = #{record.typeName,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      data_time = #{record.dataTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hd.pojo.StopTaskinfo" >
+    update stop_taskinfo
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null" >
+        batch_id = #{batchId,jdbcType=INTEGER},
+      </if>
+      <if test="agentName != null" >
+        agent_name = #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskBatchId != null" >
+        task_batch_id = #{taskBatchId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingTeam != null" >
+        marketing_team = #{marketingTeam,jdbcType=INTEGER},
+      </if>
+      <if test="countOutCallUser != null" >
+        count_out_call_user = #{countOutCallUser,jdbcType=INTEGER},
+      </if>
+      <if test="taskCount != null" >
+        task_count = #{taskCount,jdbcType=INTEGER},
+      </if>
+      <if test="invalidCount != null" >
+        invalid_count = #{invalidCount,jdbcType=INTEGER},
+      </if>
+      <if test="validCount != null" >
+        valid_count = #{validCount,jdbcType=INTEGER},
+      </if>
+      <if test="stopCount != null" >
+        stop_count = #{stopCount,jdbcType=INTEGER},
+      </if>
+      <if test="taskStatus != null" >
+        task_status = #{taskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="callNumCount != null" >
+        call_num_count = #{callNumCount,jdbcType=INTEGER},
+      </if>
+      <if test="countDataPool != null" >
+        count_data_pool = #{countDataPool,jdbcType=INTEGER},
+      </if>
+      <if test="coutCall != null" >
+        cout_call = #{coutCall,jdbcType=INTEGER},
+      </if>
+      <if test="coutSucceedCall != null" >
+        cout_succeed_call = #{coutSucceedCall,jdbcType=INTEGER},
+      </if>
+      <if test="coutSucceedCallRate != null" >
+        cout_succeed_call_rate = #{coutSucceedCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="outCallCount != null" >
+        out_call_count = #{outCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succeedoutCallCount != null" >
+        Succeedout_call_count = #{succeedoutCallCount,jdbcType=INTEGER},
+      </if>
+      <if test="getCallRate != null" >
+        get_call_rate = #{getCallRate,jdbcType=VARCHAR},
+      </if>
+      <if test="contactRate != null" >
+        Contact_rate = #{contactRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countIntentionOrderNum != null" >
+        count_intention_order_num = #{countIntentionOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="countOrderNum != null" >
+        count_order_num = #{countOrderNum,jdbcType=INTEGER},
+      </if>
+      <if test="onsuccesRate != null" >
+        OnSucces_rate = #{onsuccesRate,jdbcType=VARCHAR},
+      </if>
+      <if test="queryOrderQuantity != null" >
+        query_order_quantity = #{queryOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="billingSchedule != null" >
+        Billing_schedule = #{billingSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="queryOrderActualSuccess != null" >
+        query_order_actual_success = #{queryOrderActualSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="queryOrderAmountSuccess != null" >
+        query_order_amount_success = #{queryOrderAmountSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="queryOrderAmountFailing != null" >
+        query_order_amount_failing = #{queryOrderAmountFailing,jdbcType=INTEGER},
+      </if>
+      <if test="successRateOfBilling != null" >
+        Success_rate_of_billing = #{successRateOfBilling,jdbcType=VARCHAR},
+      </if>
+      <if test="countQcStatus != null" >
+        count_qc_status = #{countQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="countTrueQcStatus != null" >
+        count_true_qc_status = #{countTrueQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inspectionRate != null" >
+        inspection_rate = #{inspectionRate,jdbcType=VARCHAR},
+      </if>
+      <if test="queryTwoQcStatus != null" >
+        query_two_qc_status = #{queryTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="queryTrueTwoQcStatus != null" >
+        query_true_two_qc_status = #{queryTrueTwoQcStatus,jdbcType=INTEGER},
+      </if>
+      <if test="inspection2Rate != null" >
+        inspection2_rate = #{inspection2Rate,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTypeName != null" >
+        task_type_name = #{taskTypeName,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataTime != null" >
+        data_time = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hd.pojo.StopTaskinfo" >
+    update stop_taskinfo
+    set task_id = #{taskId,jdbcType=INTEGER},
+      batch_id = #{batchId,jdbcType=INTEGER},
+      agent_name = #{agentName,jdbcType=VARCHAR},
+      task_batch_id = #{taskBatchId,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      marketing_team = #{marketingTeam,jdbcType=INTEGER},
+      count_out_call_user = #{countOutCallUser,jdbcType=INTEGER},
+      task_count = #{taskCount,jdbcType=INTEGER},
+      invalid_count = #{invalidCount,jdbcType=INTEGER},
+      valid_count = #{validCount,jdbcType=INTEGER},
+      stop_count = #{stopCount,jdbcType=INTEGER},
+      task_status = #{taskStatus,jdbcType=INTEGER},
+      call_num_count = #{callNumCount,jdbcType=INTEGER},
+      count_data_pool = #{countDataPool,jdbcType=INTEGER},
+      cout_call = #{coutCall,jdbcType=INTEGER},
+      cout_succeed_call = #{coutSucceedCall,jdbcType=INTEGER},
+      cout_succeed_call_rate = #{coutSucceedCallRate,jdbcType=VARCHAR},
+      out_call_count = #{outCallCount,jdbcType=INTEGER},
+      Succeedout_call_count = #{succeedoutCallCount,jdbcType=INTEGER},
+      get_call_rate = #{getCallRate,jdbcType=VARCHAR},
+      Contact_rate = #{contactRate,jdbcType=VARCHAR},
+      count_intention_order_num = #{countIntentionOrderNum,jdbcType=INTEGER},
+      count_order_num = #{countOrderNum,jdbcType=INTEGER},
+      OnSucces_rate = #{onsuccesRate,jdbcType=VARCHAR},
+      query_order_quantity = #{queryOrderQuantity,jdbcType=INTEGER},
+      Billing_schedule = #{billingSchedule,jdbcType=VARCHAR},
+      query_order_actual_success = #{queryOrderActualSuccess,jdbcType=INTEGER},
+      query_order_amount_success = #{queryOrderAmountSuccess,jdbcType=INTEGER},
+      query_order_amount_failing = #{queryOrderAmountFailing,jdbcType=INTEGER},
+      Success_rate_of_billing = #{successRateOfBilling,jdbcType=VARCHAR},
+      count_qc_status = #{countQcStatus,jdbcType=INTEGER},
+      count_true_qc_status = #{countTrueQcStatus,jdbcType=INTEGER},
+      inspection_rate = #{inspectionRate,jdbcType=VARCHAR},
+      query_two_qc_status = #{queryTwoQcStatus,jdbcType=INTEGER},
+      query_true_two_qc_status = #{queryTrueTwoQcStatus,jdbcType=INTEGER},
+      inspection2_rate = #{inspection2Rate,jdbcType=VARCHAR},
+      task_type_name = #{taskTypeName,jdbcType=INTEGER},
+      type_name = #{typeName,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      data_time = #{dataTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

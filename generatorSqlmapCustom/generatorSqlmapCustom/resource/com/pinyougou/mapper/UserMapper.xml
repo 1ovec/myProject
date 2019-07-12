@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.User" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="agent_id" property="agentId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="telephone_num" property="telephoneNum" jdbcType="VARCHAR" />
+    <result column="telephone_pwd" property="telephonePwd" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="TINYINT" />
+    <result column="identity_num" property="identityNum" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="call_pattern" property="callPattern" jdbcType="TINYINT" />
+    <result column="exterior_phone" property="exteriorPhone" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="auto_answer" property="autoAnswer" jdbcType="BIT" />
+    <result column="user_status" property="userStatus" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="is_online" property="isOnline" jdbcType="BIT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="is_use_dialpad" property="isUseDialpad" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="is_first_login" property="isFirstLogin" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="is_auto_call" property="isAutoCall" jdbcType="TINYINT" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="LoginIP" property="loginip" jdbcType="VARCHAR" />
+    <result column="is_verify" property="isVerify" jdbcType="TINYINT" />
+    <result column="veriface_address" property="verifaceAddress" jdbcType="VARCHAR" />
+    <result column="is_face_collect" property="isFaceCollect" jdbcType="TINYINT" />
+    <result column="face_audit" property="faceAudit" jdbcType="TINYINT" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="p_agentId" property="pAgentid" jdbcType="INTEGER" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pinyougou.pojo.UserWithBLOBs" extends="BaseResultMap" >
+    <result column="face_feature" property="faceFeature" jdbcType="LONGVARCHAR" />
+    <result column="collect_image_url" property="collectImageUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, agent_id, username, password, telephone_num, telephone_pwd, name, gender, identity_num, 
+    picture, call_pattern, exterior_phone, group_id, auto_answer, user_status, status, 
+    phone_num, avatar, email, last_login_ip, is_online, address, utime, ctime, is_use_dialpad, 
+    type, is_first_login, token, is_auto_call, staff_id, LoginIP, is_verify, veriface_address, 
+    is_face_collect, face_audit, login_time, p_agentId, provinceId
+  </sql>
+  <sql id="Blob_Column_List" >
+    face_feature, collect_image_url
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pinyougou.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.pinyougou.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pinyougou.pojo.UserWithBLOBs" >
+    insert into user (id, agent_id, username, 
+      password, telephone_num, telephone_pwd, 
+      name, gender, identity_num, 
+      picture, call_pattern, exterior_phone, 
+      group_id, auto_answer, user_status, 
+      status, phone_num, avatar, 
+      email, last_login_ip, is_online, 
+      address, utime, ctime, 
+      is_use_dialpad, type, is_first_login, 
+      token, is_auto_call, staff_id, 
+      LoginIP, is_verify, veriface_address, 
+      is_face_collect, face_audit, login_time, 
+      p_agentId, provinceId, face_feature, 
+      collect_image_url)
+    values (#{id,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{telephoneNum,jdbcType=VARCHAR}, #{telephonePwd,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, #{identityNum,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{callPattern,jdbcType=TINYINT}, #{exteriorPhone,jdbcType=VARCHAR}, 
+      #{groupId,jdbcType=INTEGER}, #{autoAnswer,jdbcType=BIT}, #{userStatus,jdbcType=BIT}, 
+      #{status,jdbcType=BIT}, #{phoneNum,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, #{isOnline,jdbcType=BIT}, 
+      #{address,jdbcType=VARCHAR}, #{utime,jdbcType=TIMESTAMP}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{isUseDialpad,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{isFirstLogin,jdbcType=INTEGER}, 
+      #{token,jdbcType=VARCHAR}, #{isAutoCall,jdbcType=TINYINT}, #{staffId,jdbcType=VARCHAR}, 
+      #{loginip,jdbcType=VARCHAR}, #{isVerify,jdbcType=TINYINT}, #{verifaceAddress,jdbcType=VARCHAR}, 
+      #{isFaceCollect,jdbcType=TINYINT}, #{faceAudit,jdbcType=TINYINT}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{pAgentid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, #{faceFeature,jdbcType=LONGVARCHAR}, 
+      #{collectImageUrl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pinyougou.pojo.UserWithBLOBs" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="agentId != null" >
+        agent_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="telephoneNum != null" >
+        telephone_num,
+      </if>
+      <if test="telephonePwd != null" >
+        telephone_pwd,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="identityNum != null" >
+        identity_num,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="callPattern != null" >
+        call_pattern,
+      </if>
+      <if test="exteriorPhone != null" >
+        exterior_phone,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="autoAnswer != null" >
+        auto_answer,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="utime != null" >
+        utime,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="isUseDialpad != null" >
+        is_use_dialpad,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isFirstLogin != null" >
+        is_first_login,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="isAutoCall != null" >
+        is_auto_call,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="loginip != null" >
+        LoginIP,
+      </if>
+      <if test="isVerify != null" >
+        is_verify,
+      </if>
+      <if test="verifaceAddress != null" >
+        veriface_address,
+      </if>
+      <if test="isFaceCollect != null" >
+        is_face_collect,
+      </if>
+      <if test="faceAudit != null" >
+        face_audit,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="pAgentid != null" >
+        p_agentId,
+      </if>
+      <if test="provinceid != null" >
+        provinceId,
+      </if>
+      <if test="faceFeature != null" >
+        face_feature,
+      </if>
+      <if test="collectImageUrl != null" >
+        collect_image_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneNum != null" >
+        #{telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="telephonePwd != null" >
+        #{telephonePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="identityNum != null" >
+        #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="callPattern != null" >
+        #{callPattern,jdbcType=TINYINT},
+      </if>
+      <if test="exteriorPhone != null" >
+        #{exteriorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="autoAnswer != null" >
+        #{autoAnswer,jdbcType=BIT},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=BIT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="utime != null" >
+        #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUseDialpad != null" >
+        #{isUseDialpad,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="isFirstLogin != null" >
+        #{isFirstLogin,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="isAutoCall != null" >
+        #{isAutoCall,jdbcType=TINYINT},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerify != null" >
+        #{isVerify,jdbcType=TINYINT},
+      </if>
+      <if test="verifaceAddress != null" >
+        #{verifaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isFaceCollect != null" >
+        #{isFaceCollect,jdbcType=TINYINT},
+      </if>
+      <if test="faceAudit != null" >
+        #{faceAudit,jdbcType=TINYINT},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pAgentid != null" >
+        #{pAgentid,jdbcType=INTEGER},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="faceFeature != null" >
+        #{faceFeature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="collectImageUrl != null" >
+        #{collectImageUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pinyougou.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentId != null" >
+        agent_id = #{record.agentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephoneNum != null" >
+        telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephonePwd != null" >
+        telephone_pwd = #{record.telephonePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=TINYINT},
+      </if>
+      <if test="record.identityNum != null" >
+        identity_num = #{record.identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callPattern != null" >
+        call_pattern = #{record.callPattern,jdbcType=TINYINT},
+      </if>
+      <if test="record.exteriorPhone != null" >
+        exterior_phone = #{record.exteriorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoAnswer != null" >
+        auto_answer = #{record.autoAnswer,jdbcType=BIT},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=BIT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.phoneNum != null" >
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginIp != null" >
+        last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOnline != null" >
+        is_online = #{record.isOnline,jdbcType=BIT},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.utime != null" >
+        utime = #{record.utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isUseDialpad != null" >
+        is_use_dialpad = #{record.isUseDialpad,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.isFirstLogin != null" >
+        is_first_login = #{record.isFirstLogin,jdbcType=INTEGER},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAutoCall != null" >
+        is_auto_call = #{record.isAutoCall,jdbcType=TINYINT},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginip != null" >
+        LoginIP = #{record.loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isVerify != null" >
+        is_verify = #{record.isVerify,jdbcType=TINYINT},
+      </if>
+      <if test="record.verifaceAddress != null" >
+        veriface_address = #{record.verifaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFaceCollect != null" >
+        is_face_collect = #{record.isFaceCollect,jdbcType=TINYINT},
+      </if>
+      <if test="record.faceAudit != null" >
+        face_audit = #{record.faceAudit,jdbcType=TINYINT},
+      </if>
+      <if test="record.loginTime != null" >
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pAgentid != null" >
+        p_agentId = #{record.pAgentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceid != null" >
+        provinceId = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.faceFeature != null" >
+        face_feature = #{record.faceFeature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.collectImageUrl != null" >
+        collect_image_url = #{record.collectImageUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      telephone_pwd = #{record.telephonePwd,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=TINYINT},
+      identity_num = #{record.identityNum,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      call_pattern = #{record.callPattern,jdbcType=TINYINT},
+      exterior_phone = #{record.exteriorPhone,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      auto_answer = #{record.autoAnswer,jdbcType=BIT},
+      user_status = #{record.userStatus,jdbcType=BIT},
+      status = #{record.status,jdbcType=BIT},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      is_online = #{record.isOnline,jdbcType=BIT},
+      address = #{record.address,jdbcType=VARCHAR},
+      utime = #{record.utime,jdbcType=TIMESTAMP},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      is_use_dialpad = #{record.isUseDialpad,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      is_first_login = #{record.isFirstLogin,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=VARCHAR},
+      is_auto_call = #{record.isAutoCall,jdbcType=TINYINT},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      LoginIP = #{record.loginip,jdbcType=VARCHAR},
+      is_verify = #{record.isVerify,jdbcType=TINYINT},
+      veriface_address = #{record.verifaceAddress,jdbcType=VARCHAR},
+      is_face_collect = #{record.isFaceCollect,jdbcType=TINYINT},
+      face_audit = #{record.faceAudit,jdbcType=TINYINT},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      p_agentId = #{record.pAgentid,jdbcType=INTEGER},
+      provinceId = #{record.provinceid,jdbcType=INTEGER},
+      face_feature = #{record.faceFeature,jdbcType=LONGVARCHAR},
+      collect_image_url = #{record.collectImageUrl,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      telephone_pwd = #{record.telephonePwd,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=TINYINT},
+      identity_num = #{record.identityNum,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      call_pattern = #{record.callPattern,jdbcType=TINYINT},
+      exterior_phone = #{record.exteriorPhone,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=INTEGER},
+      auto_answer = #{record.autoAnswer,jdbcType=BIT},
+      user_status = #{record.userStatus,jdbcType=BIT},
+      status = #{record.status,jdbcType=BIT},
+      phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      is_online = #{record.isOnline,jdbcType=BIT},
+      address = #{record.address,jdbcType=VARCHAR},
+      utime = #{record.utime,jdbcType=TIMESTAMP},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      is_use_dialpad = #{record.isUseDialpad,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      is_first_login = #{record.isFirstLogin,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=VARCHAR},
+      is_auto_call = #{record.isAutoCall,jdbcType=TINYINT},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      LoginIP = #{record.loginip,jdbcType=VARCHAR},
+      is_verify = #{record.isVerify,jdbcType=TINYINT},
+      veriface_address = #{record.verifaceAddress,jdbcType=VARCHAR},
+      is_face_collect = #{record.isFaceCollect,jdbcType=TINYINT},
+      face_audit = #{record.faceAudit,jdbcType=TINYINT},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      p_agentId = #{record.pAgentid,jdbcType=INTEGER},
+      provinceId = #{record.provinceid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

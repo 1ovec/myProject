@@ -1,0 +1,1338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pinyougou.mapper.PersonasDayMapper">
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.PersonasDay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="telephone_num" jdbcType="VARCHAR" property="telephoneNum" />
+    <result column="succcall_count" jdbcType="INTEGER" property="succcallCount" />
+    <result column="succorder_count" jdbcType="INTEGER" property="succorderCount" />
+    <result column="concall_count" jdbcType="INTEGER" property="concallCount" />
+    <result column="allcall_count" jdbcType="INTEGER" property="allcallCount" />
+    <result column="succqc_count" jdbcType="INTEGER" property="succqcCount" />
+    <result column="succsecqc_count" jdbcType="INTEGER" property="succsecqcCount" />
+    <result column="succaccount_count" jdbcType="INTEGER" property="succaccountCount" />
+    <result column="complain_count" jdbcType="INTEGER" property="complainCount" />
+    <result column="voice_normal" jdbcType="INTEGER" property="voiceNormal" />
+    <result column="voice_exception" jdbcType="INTEGER" property="voiceException" />
+    <result column="quality_service" jdbcType="INTEGER" property="qualityService" />
+    <result column="error_endresult" jdbcType="INTEGER" property="errorEndresult" />
+    <result column="credit_score" jdbcType="INTEGER" property="creditScore" />
+    <result column="skills" jdbcType="VARCHAR" property="skills" />
+    <result column="business_skills" jdbcType="VARCHAR" property="businessSkills" />
+    <result column="educational" jdbcType="VARCHAR" property="educational" />
+    <result column="work_exp" jdbcType="VARCHAR" property="workExp" />
+    <result column="points" jdbcType="INTEGER" property="points" />
+    <result column="nowpoints" jdbcType="INTEGER" property="nowpoints" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="person_info" jdbcType="VARCHAR" property="personInfo" />
+    <result column="all_loginTime" jdbcType="BIGINT" property="allLogintime" />
+    <result column="all_callTime" jdbcType="BIGINT" property="allCalltime" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="datatime" jdbcType="DATE" property="datatime" />
+    <result column="screen_busytime" jdbcType="BIGINT" property="screenBusytime" />
+    <result column="hand_busytime" jdbcType="BIGINT" property="handBusytime" />
+    <result column="provinceId" jdbcType="INTEGER" property="provinceid" />
+    <result column="p_agentId" jdbcType="INTEGER" property="pAgentid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, agent_id, telephone_num, succcall_count, succorder_count, concall_count, 
+    allcall_count, succqc_count, succsecqc_count, succaccount_count, complain_count, 
+    voice_normal, voice_exception, quality_service, error_endresult, credit_score, skills, 
+    business_skills, educational, work_exp, points, nowpoints, level, rank, person_info, 
+    all_loginTime, all_callTime, ctime, datatime, screen_busytime, hand_busytime, provinceId, 
+    p_agentId
+  </sql>
+  <select id="selectByExample" parameterType="com.pinyougou.pojo.PersonasDayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from personas_day
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from personas_day
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pinyougou.pojo.PersonasDayExample">
+    delete from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pinyougou.pojo.PersonasDay">
+    insert into personas_day (id, user_id, agent_id, 
+      telephone_num, succcall_count, succorder_count, 
+      concall_count, allcall_count, succqc_count, 
+      succsecqc_count, succaccount_count, complain_count, 
+      voice_normal, voice_exception, quality_service, 
+      error_endresult, credit_score, skills, 
+      business_skills, educational, work_exp, 
+      points, nowpoints, level, 
+      rank, person_info, all_loginTime, 
+      all_callTime, ctime, datatime, 
+      screen_busytime, hand_busytime, provinceId, 
+      p_agentId)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, 
+      #{telephoneNum,jdbcType=VARCHAR}, #{succcallCount,jdbcType=INTEGER}, #{succorderCount,jdbcType=INTEGER}, 
+      #{concallCount,jdbcType=INTEGER}, #{allcallCount,jdbcType=INTEGER}, #{succqcCount,jdbcType=INTEGER}, 
+      #{succsecqcCount,jdbcType=INTEGER}, #{succaccountCount,jdbcType=INTEGER}, #{complainCount,jdbcType=INTEGER}, 
+      #{voiceNormal,jdbcType=INTEGER}, #{voiceException,jdbcType=INTEGER}, #{qualityService,jdbcType=INTEGER}, 
+      #{errorEndresult,jdbcType=INTEGER}, #{creditScore,jdbcType=INTEGER}, #{skills,jdbcType=VARCHAR}, 
+      #{businessSkills,jdbcType=VARCHAR}, #{educational,jdbcType=VARCHAR}, #{workExp,jdbcType=VARCHAR}, 
+      #{points,jdbcType=INTEGER}, #{nowpoints,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{rank,jdbcType=INTEGER}, #{personInfo,jdbcType=VARCHAR}, #{allLogintime,jdbcType=BIGINT}, 
+      #{allCalltime,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, #{datatime,jdbcType=DATE}, 
+      #{screenBusytime,jdbcType=BIGINT}, #{handBusytime,jdbcType=BIGINT}, #{provinceid,jdbcType=INTEGER}, 
+      #{pAgentid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pinyougou.pojo.PersonasDay">
+    insert into personas_day
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="telephoneNum != null">
+        telephone_num,
+      </if>
+      <if test="succcallCount != null">
+        succcall_count,
+      </if>
+      <if test="succorderCount != null">
+        succorder_count,
+      </if>
+      <if test="concallCount != null">
+        concall_count,
+      </if>
+      <if test="allcallCount != null">
+        allcall_count,
+      </if>
+      <if test="succqcCount != null">
+        succqc_count,
+      </if>
+      <if test="succsecqcCount != null">
+        succsecqc_count,
+      </if>
+      <if test="succaccountCount != null">
+        succaccount_count,
+      </if>
+      <if test="complainCount != null">
+        complain_count,
+      </if>
+      <if test="voiceNormal != null">
+        voice_normal,
+      </if>
+      <if test="voiceException != null">
+        voice_exception,
+      </if>
+      <if test="qualityService != null">
+        quality_service,
+      </if>
+      <if test="errorEndresult != null">
+        error_endresult,
+      </if>
+      <if test="creditScore != null">
+        credit_score,
+      </if>
+      <if test="skills != null">
+        skills,
+      </if>
+      <if test="businessSkills != null">
+        business_skills,
+      </if>
+      <if test="educational != null">
+        educational,
+      </if>
+      <if test="workExp != null">
+        work_exp,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+      <if test="nowpoints != null">
+        nowpoints,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="personInfo != null">
+        person_info,
+      </if>
+      <if test="allLogintime != null">
+        all_loginTime,
+      </if>
+      <if test="allCalltime != null">
+        all_callTime,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="datatime != null">
+        datatime,
+      </if>
+      <if test="screenBusytime != null">
+        screen_busytime,
+      </if>
+      <if test="handBusytime != null">
+        hand_busytime,
+      </if>
+      <if test="provinceid != null">
+        provinceId,
+      </if>
+      <if test="pAgentid != null">
+        p_agentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNum != null">
+        #{telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="succcallCount != null">
+        #{succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succorderCount != null">
+        #{succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="concallCount != null">
+        #{concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="allcallCount != null">
+        #{allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succqcCount != null">
+        #{succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succsecqcCount != null">
+        #{succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succaccountCount != null">
+        #{succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="complainCount != null">
+        #{complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="voiceNormal != null">
+        #{voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="voiceException != null">
+        #{voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="qualityService != null">
+        #{qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="errorEndresult != null">
+        #{errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="skills != null">
+        #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSkills != null">
+        #{businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null">
+        #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="workExp != null">
+        #{workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="nowpoints != null">
+        #{nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="personInfo != null">
+        #{personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allLogintime != null">
+        #{allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="allCalltime != null">
+        #{allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datatime != null">
+        #{datatime,jdbcType=DATE},
+      </if>
+      <if test="screenBusytime != null">
+        #{screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="handBusytime != null">
+        #{handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="pAgentid != null">
+        #{pAgentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pinyougou.pojo.PersonasDayExample" resultType="java.lang.Integer">
+    select count(*) from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update personas_day
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentId != null">
+        agent_id = #{record.agentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.telephoneNum != null">
+        telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.succcallCount != null">
+        succcall_count = #{record.succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succorderCount != null">
+        succorder_count = #{record.succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.concallCount != null">
+        concall_count = #{record.concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.allcallCount != null">
+        allcall_count = #{record.allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succqcCount != null">
+        succqc_count = #{record.succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succsecqcCount != null">
+        succsecqc_count = #{record.succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succaccountCount != null">
+        succaccount_count = #{record.succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.complainCount != null">
+        complain_count = #{record.complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.voiceNormal != null">
+        voice_normal = #{record.voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="record.voiceException != null">
+        voice_exception = #{record.voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualityService != null">
+        quality_service = #{record.qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorEndresult != null">
+        error_endresult = #{record.errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditScore != null">
+        credit_score = #{record.creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.skills != null">
+        skills = #{record.skills,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessSkills != null">
+        business_skills = #{record.businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educational != null">
+        educational = #{record.educational,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExp != null">
+        work_exp = #{record.workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.points != null">
+        points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.nowpoints != null">
+        nowpoints = #{record.nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.personInfo != null">
+        person_info = #{record.personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allLogintime != null">
+        all_loginTime = #{record.allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="record.allCalltime != null">
+        all_callTime = #{record.allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.datatime != null">
+        datatime = #{record.datatime,jdbcType=DATE},
+      </if>
+      <if test="record.screenBusytime != null">
+        screen_busytime = #{record.screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="record.handBusytime != null">
+        hand_busytime = #{record.handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="record.provinceid != null">
+        provinceId = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pAgentid != null">
+        p_agentId = #{record.pAgentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update personas_day
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      succcall_count = #{record.succcallCount,jdbcType=INTEGER},
+      succorder_count = #{record.succorderCount,jdbcType=INTEGER},
+      concall_count = #{record.concallCount,jdbcType=INTEGER},
+      allcall_count = #{record.allcallCount,jdbcType=INTEGER},
+      succqc_count = #{record.succqcCount,jdbcType=INTEGER},
+      succsecqc_count = #{record.succsecqcCount,jdbcType=INTEGER},
+      succaccount_count = #{record.succaccountCount,jdbcType=INTEGER},
+      complain_count = #{record.complainCount,jdbcType=INTEGER},
+      voice_normal = #{record.voiceNormal,jdbcType=INTEGER},
+      voice_exception = #{record.voiceException,jdbcType=INTEGER},
+      quality_service = #{record.qualityService,jdbcType=INTEGER},
+      error_endresult = #{record.errorEndresult,jdbcType=INTEGER},
+      credit_score = #{record.creditScore,jdbcType=INTEGER},
+      skills = #{record.skills,jdbcType=VARCHAR},
+      business_skills = #{record.businessSkills,jdbcType=VARCHAR},
+      educational = #{record.educational,jdbcType=VARCHAR},
+      work_exp = #{record.workExp,jdbcType=VARCHAR},
+      points = #{record.points,jdbcType=INTEGER},
+      nowpoints = #{record.nowpoints,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=INTEGER},
+      person_info = #{record.personInfo,jdbcType=VARCHAR},
+      all_loginTime = #{record.allLogintime,jdbcType=BIGINT},
+      all_callTime = #{record.allCalltime,jdbcType=BIGINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      datatime = #{record.datatime,jdbcType=DATE},
+      screen_busytime = #{record.screenBusytime,jdbcType=BIGINT},
+      hand_busytime = #{record.handBusytime,jdbcType=BIGINT},
+      provinceId = #{record.provinceid,jdbcType=INTEGER},
+      p_agentId = #{record.pAgentid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.PersonasDay">
+    update personas_day
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNum != null">
+        telephone_num = #{telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="succcallCount != null">
+        succcall_count = #{succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succorderCount != null">
+        succorder_count = #{succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="concallCount != null">
+        concall_count = #{concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="allcallCount != null">
+        allcall_count = #{allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succqcCount != null">
+        succqc_count = #{succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succsecqcCount != null">
+        succsecqc_count = #{succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succaccountCount != null">
+        succaccount_count = #{succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="complainCount != null">
+        complain_count = #{complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="voiceNormal != null">
+        voice_normal = #{voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="voiceException != null">
+        voice_exception = #{voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="qualityService != null">
+        quality_service = #{qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="errorEndresult != null">
+        error_endresult = #{errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        credit_score = #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="skills != null">
+        skills = #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSkills != null">
+        business_skills = #{businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null">
+        educational = #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="workExp != null">
+        work_exp = #{workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="nowpoints != null">
+        nowpoints = #{nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="personInfo != null">
+        person_info = #{personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allLogintime != null">
+        all_loginTime = #{allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="allCalltime != null">
+        all_callTime = #{allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datatime != null">
+        datatime = #{datatime,jdbcType=DATE},
+      </if>
+      <if test="screenBusytime != null">
+        screen_busytime = #{screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="handBusytime != null">
+        hand_busytime = #{handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="provinceid != null">
+        provinceId = #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="pAgentid != null">
+        p_agentId = #{pAgentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.PersonasDay">
+    update personas_day
+    set user_id = #{userId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      telephone_num = #{telephoneNum,jdbcType=VARCHAR},
+      succcall_count = #{succcallCount,jdbcType=INTEGER},
+      succorder_count = #{succorderCount,jdbcType=INTEGER},
+      concall_count = #{concallCount,jdbcType=INTEGER},
+      allcall_count = #{allcallCount,jdbcType=INTEGER},
+      succqc_count = #{succqcCount,jdbcType=INTEGER},
+      succsecqc_count = #{succsecqcCount,jdbcType=INTEGER},
+      succaccount_count = #{succaccountCount,jdbcType=INTEGER},
+      complain_count = #{complainCount,jdbcType=INTEGER},
+      voice_normal = #{voiceNormal,jdbcType=INTEGER},
+      voice_exception = #{voiceException,jdbcType=INTEGER},
+      quality_service = #{qualityService,jdbcType=INTEGER},
+      error_endresult = #{errorEndresult,jdbcType=INTEGER},
+      credit_score = #{creditScore,jdbcType=INTEGER},
+      skills = #{skills,jdbcType=VARCHAR},
+      business_skills = #{businessSkills,jdbcType=VARCHAR},
+      educational = #{educational,jdbcType=VARCHAR},
+      work_exp = #{workExp,jdbcType=VARCHAR},
+      points = #{points,jdbcType=INTEGER},
+      nowpoints = #{nowpoints,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      person_info = #{personInfo,jdbcType=VARCHAR},
+      all_loginTime = #{allLogintime,jdbcType=BIGINT},
+      all_callTime = #{allCalltime,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      datatime = #{datatime,jdbcType=DATE},
+      screen_busytime = #{screenBusytime,jdbcType=BIGINT},
+      hand_busytime = #{handBusytime,jdbcType=BIGINT},
+      provinceId = #{provinceid,jdbcType=INTEGER},
+      p_agentId = #{pAgentid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.PersonasDay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="telephone_num" jdbcType="VARCHAR" property="telephoneNum" />
+    <result column="succcall_count" jdbcType="INTEGER" property="succcallCount" />
+    <result column="succorder_count" jdbcType="INTEGER" property="succorderCount" />
+    <result column="concall_count" jdbcType="INTEGER" property="concallCount" />
+    <result column="allcall_count" jdbcType="INTEGER" property="allcallCount" />
+    <result column="succqc_count" jdbcType="INTEGER" property="succqcCount" />
+    <result column="succsecqc_count" jdbcType="INTEGER" property="succsecqcCount" />
+    <result column="succaccount_count" jdbcType="INTEGER" property="succaccountCount" />
+    <result column="complain_count" jdbcType="INTEGER" property="complainCount" />
+    <result column="voice_normal" jdbcType="INTEGER" property="voiceNormal" />
+    <result column="voice_exception" jdbcType="INTEGER" property="voiceException" />
+    <result column="quality_service" jdbcType="INTEGER" property="qualityService" />
+    <result column="error_endresult" jdbcType="INTEGER" property="errorEndresult" />
+    <result column="credit_score" jdbcType="INTEGER" property="creditScore" />
+    <result column="skills" jdbcType="VARCHAR" property="skills" />
+    <result column="business_skills" jdbcType="VARCHAR" property="businessSkills" />
+    <result column="educational" jdbcType="VARCHAR" property="educational" />
+    <result column="work_exp" jdbcType="VARCHAR" property="workExp" />
+    <result column="points" jdbcType="INTEGER" property="points" />
+    <result column="nowpoints" jdbcType="INTEGER" property="nowpoints" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="person_info" jdbcType="VARCHAR" property="personInfo" />
+    <result column="all_loginTime" jdbcType="BIGINT" property="allLogintime" />
+    <result column="all_callTime" jdbcType="BIGINT" property="allCalltime" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="datatime" jdbcType="DATE" property="datatime" />
+    <result column="screen_busytime" jdbcType="BIGINT" property="screenBusytime" />
+    <result column="hand_busytime" jdbcType="BIGINT" property="handBusytime" />
+    <result column="provinceId" jdbcType="INTEGER" property="provinceid" />
+    <result column="p_agentId" jdbcType="INTEGER" property="pAgentid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, agent_id, telephone_num, succcall_count, succorder_count, concall_count, 
+    allcall_count, succqc_count, succsecqc_count, succaccount_count, complain_count, 
+    voice_normal, voice_exception, quality_service, error_endresult, credit_score, skills, 
+    business_skills, educational, work_exp, points, nowpoints, level, rank, person_info, 
+    all_loginTime, all_callTime, ctime, datatime, screen_busytime, hand_busytime, provinceId, 
+    p_agentId
+  </sql>
+  <select id="selectByExample" parameterType="com.pinyougou.pojo.PersonasDayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from personas_day
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from personas_day
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pinyougou.pojo.PersonasDayExample">
+    delete from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pinyougou.pojo.PersonasDay">
+    insert into personas_day (id, user_id, agent_id, 
+      telephone_num, succcall_count, succorder_count, 
+      concall_count, allcall_count, succqc_count, 
+      succsecqc_count, succaccount_count, complain_count, 
+      voice_normal, voice_exception, quality_service, 
+      error_endresult, credit_score, skills, 
+      business_skills, educational, work_exp, 
+      points, nowpoints, level, 
+      rank, person_info, all_loginTime, 
+      all_callTime, ctime, datatime, 
+      screen_busytime, hand_busytime, provinceId, 
+      p_agentId)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{agentId,jdbcType=INTEGER}, 
+      #{telephoneNum,jdbcType=VARCHAR}, #{succcallCount,jdbcType=INTEGER}, #{succorderCount,jdbcType=INTEGER}, 
+      #{concallCount,jdbcType=INTEGER}, #{allcallCount,jdbcType=INTEGER}, #{succqcCount,jdbcType=INTEGER}, 
+      #{succsecqcCount,jdbcType=INTEGER}, #{succaccountCount,jdbcType=INTEGER}, #{complainCount,jdbcType=INTEGER}, 
+      #{voiceNormal,jdbcType=INTEGER}, #{voiceException,jdbcType=INTEGER}, #{qualityService,jdbcType=INTEGER}, 
+      #{errorEndresult,jdbcType=INTEGER}, #{creditScore,jdbcType=INTEGER}, #{skills,jdbcType=VARCHAR}, 
+      #{businessSkills,jdbcType=VARCHAR}, #{educational,jdbcType=VARCHAR}, #{workExp,jdbcType=VARCHAR}, 
+      #{points,jdbcType=INTEGER}, #{nowpoints,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{rank,jdbcType=INTEGER}, #{personInfo,jdbcType=VARCHAR}, #{allLogintime,jdbcType=BIGINT}, 
+      #{allCalltime,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, #{datatime,jdbcType=DATE}, 
+      #{screenBusytime,jdbcType=BIGINT}, #{handBusytime,jdbcType=BIGINT}, #{provinceid,jdbcType=INTEGER}, 
+      #{pAgentid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pinyougou.pojo.PersonasDay">
+    insert into personas_day
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="telephoneNum != null">
+        telephone_num,
+      </if>
+      <if test="succcallCount != null">
+        succcall_count,
+      </if>
+      <if test="succorderCount != null">
+        succorder_count,
+      </if>
+      <if test="concallCount != null">
+        concall_count,
+      </if>
+      <if test="allcallCount != null">
+        allcall_count,
+      </if>
+      <if test="succqcCount != null">
+        succqc_count,
+      </if>
+      <if test="succsecqcCount != null">
+        succsecqc_count,
+      </if>
+      <if test="succaccountCount != null">
+        succaccount_count,
+      </if>
+      <if test="complainCount != null">
+        complain_count,
+      </if>
+      <if test="voiceNormal != null">
+        voice_normal,
+      </if>
+      <if test="voiceException != null">
+        voice_exception,
+      </if>
+      <if test="qualityService != null">
+        quality_service,
+      </if>
+      <if test="errorEndresult != null">
+        error_endresult,
+      </if>
+      <if test="creditScore != null">
+        credit_score,
+      </if>
+      <if test="skills != null">
+        skills,
+      </if>
+      <if test="businessSkills != null">
+        business_skills,
+      </if>
+      <if test="educational != null">
+        educational,
+      </if>
+      <if test="workExp != null">
+        work_exp,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+      <if test="nowpoints != null">
+        nowpoints,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="personInfo != null">
+        person_info,
+      </if>
+      <if test="allLogintime != null">
+        all_loginTime,
+      </if>
+      <if test="allCalltime != null">
+        all_callTime,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="datatime != null">
+        datatime,
+      </if>
+      <if test="screenBusytime != null">
+        screen_busytime,
+      </if>
+      <if test="handBusytime != null">
+        hand_busytime,
+      </if>
+      <if test="provinceid != null">
+        provinceId,
+      </if>
+      <if test="pAgentid != null">
+        p_agentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNum != null">
+        #{telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="succcallCount != null">
+        #{succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succorderCount != null">
+        #{succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="concallCount != null">
+        #{concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="allcallCount != null">
+        #{allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succqcCount != null">
+        #{succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succsecqcCount != null">
+        #{succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succaccountCount != null">
+        #{succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="complainCount != null">
+        #{complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="voiceNormal != null">
+        #{voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="voiceException != null">
+        #{voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="qualityService != null">
+        #{qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="errorEndresult != null">
+        #{errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="skills != null">
+        #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSkills != null">
+        #{businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null">
+        #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="workExp != null">
+        #{workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="nowpoints != null">
+        #{nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="personInfo != null">
+        #{personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allLogintime != null">
+        #{allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="allCalltime != null">
+        #{allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datatime != null">
+        #{datatime,jdbcType=DATE},
+      </if>
+      <if test="screenBusytime != null">
+        #{screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="handBusytime != null">
+        #{handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="pAgentid != null">
+        #{pAgentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pinyougou.pojo.PersonasDayExample" resultType="java.lang.Integer">
+    select count(*) from personas_day
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update personas_day
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentId != null">
+        agent_id = #{record.agentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.telephoneNum != null">
+        telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.succcallCount != null">
+        succcall_count = #{record.succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succorderCount != null">
+        succorder_count = #{record.succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.concallCount != null">
+        concall_count = #{record.concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.allcallCount != null">
+        allcall_count = #{record.allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succqcCount != null">
+        succqc_count = #{record.succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succsecqcCount != null">
+        succsecqc_count = #{record.succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.succaccountCount != null">
+        succaccount_count = #{record.succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.complainCount != null">
+        complain_count = #{record.complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.voiceNormal != null">
+        voice_normal = #{record.voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="record.voiceException != null">
+        voice_exception = #{record.voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualityService != null">
+        quality_service = #{record.qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorEndresult != null">
+        error_endresult = #{record.errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditScore != null">
+        credit_score = #{record.creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.skills != null">
+        skills = #{record.skills,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessSkills != null">
+        business_skills = #{record.businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educational != null">
+        educational = #{record.educational,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workExp != null">
+        work_exp = #{record.workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.points != null">
+        points = #{record.points,jdbcType=INTEGER},
+      </if>
+      <if test="record.nowpoints != null">
+        nowpoints = #{record.nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.personInfo != null">
+        person_info = #{record.personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allLogintime != null">
+        all_loginTime = #{record.allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="record.allCalltime != null">
+        all_callTime = #{record.allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.datatime != null">
+        datatime = #{record.datatime,jdbcType=DATE},
+      </if>
+      <if test="record.screenBusytime != null">
+        screen_busytime = #{record.screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="record.handBusytime != null">
+        hand_busytime = #{record.handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="record.provinceid != null">
+        provinceId = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pAgentid != null">
+        p_agentId = #{record.pAgentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update personas_day
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      telephone_num = #{record.telephoneNum,jdbcType=VARCHAR},
+      succcall_count = #{record.succcallCount,jdbcType=INTEGER},
+      succorder_count = #{record.succorderCount,jdbcType=INTEGER},
+      concall_count = #{record.concallCount,jdbcType=INTEGER},
+      allcall_count = #{record.allcallCount,jdbcType=INTEGER},
+      succqc_count = #{record.succqcCount,jdbcType=INTEGER},
+      succsecqc_count = #{record.succsecqcCount,jdbcType=INTEGER},
+      succaccount_count = #{record.succaccountCount,jdbcType=INTEGER},
+      complain_count = #{record.complainCount,jdbcType=INTEGER},
+      voice_normal = #{record.voiceNormal,jdbcType=INTEGER},
+      voice_exception = #{record.voiceException,jdbcType=INTEGER},
+      quality_service = #{record.qualityService,jdbcType=INTEGER},
+      error_endresult = #{record.errorEndresult,jdbcType=INTEGER},
+      credit_score = #{record.creditScore,jdbcType=INTEGER},
+      skills = #{record.skills,jdbcType=VARCHAR},
+      business_skills = #{record.businessSkills,jdbcType=VARCHAR},
+      educational = #{record.educational,jdbcType=VARCHAR},
+      work_exp = #{record.workExp,jdbcType=VARCHAR},
+      points = #{record.points,jdbcType=INTEGER},
+      nowpoints = #{record.nowpoints,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=INTEGER},
+      person_info = #{record.personInfo,jdbcType=VARCHAR},
+      all_loginTime = #{record.allLogintime,jdbcType=BIGINT},
+      all_callTime = #{record.allCalltime,jdbcType=BIGINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      datatime = #{record.datatime,jdbcType=DATE},
+      screen_busytime = #{record.screenBusytime,jdbcType=BIGINT},
+      hand_busytime = #{record.handBusytime,jdbcType=BIGINT},
+      provinceId = #{record.provinceid,jdbcType=INTEGER},
+      p_agentId = #{record.pAgentid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.PersonasDay">
+    update personas_day
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        agent_id = #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="telephoneNum != null">
+        telephone_num = #{telephoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="succcallCount != null">
+        succcall_count = #{succcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succorderCount != null">
+        succorder_count = #{succorderCount,jdbcType=INTEGER},
+      </if>
+      <if test="concallCount != null">
+        concall_count = #{concallCount,jdbcType=INTEGER},
+      </if>
+      <if test="allcallCount != null">
+        allcall_count = #{allcallCount,jdbcType=INTEGER},
+      </if>
+      <if test="succqcCount != null">
+        succqc_count = #{succqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succsecqcCount != null">
+        succsecqc_count = #{succsecqcCount,jdbcType=INTEGER},
+      </if>
+      <if test="succaccountCount != null">
+        succaccount_count = #{succaccountCount,jdbcType=INTEGER},
+      </if>
+      <if test="complainCount != null">
+        complain_count = #{complainCount,jdbcType=INTEGER},
+      </if>
+      <if test="voiceNormal != null">
+        voice_normal = #{voiceNormal,jdbcType=INTEGER},
+      </if>
+      <if test="voiceException != null">
+        voice_exception = #{voiceException,jdbcType=INTEGER},
+      </if>
+      <if test="qualityService != null">
+        quality_service = #{qualityService,jdbcType=INTEGER},
+      </if>
+      <if test="errorEndresult != null">
+        error_endresult = #{errorEndresult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        credit_score = #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="skills != null">
+        skills = #{skills,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSkills != null">
+        business_skills = #{businessSkills,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null">
+        educational = #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="workExp != null">
+        work_exp = #{workExp,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="nowpoints != null">
+        nowpoints = #{nowpoints,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="personInfo != null">
+        person_info = #{personInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="allLogintime != null">
+        all_loginTime = #{allLogintime,jdbcType=BIGINT},
+      </if>
+      <if test="allCalltime != null">
+        all_callTime = #{allCalltime,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datatime != null">
+        datatime = #{datatime,jdbcType=DATE},
+      </if>
+      <if test="screenBusytime != null">
+        screen_busytime = #{screenBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="handBusytime != null">
+        hand_busytime = #{handBusytime,jdbcType=BIGINT},
+      </if>
+      <if test="provinceid != null">
+        provinceId = #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="pAgentid != null">
+        p_agentId = #{pAgentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.PersonasDay">
+    update personas_day
+    set user_id = #{userId,jdbcType=INTEGER},
+      agent_id = #{agentId,jdbcType=INTEGER},
+      telephone_num = #{telephoneNum,jdbcType=VARCHAR},
+      succcall_count = #{succcallCount,jdbcType=INTEGER},
+      succorder_count = #{succorderCount,jdbcType=INTEGER},
+      concall_count = #{concallCount,jdbcType=INTEGER},
+      allcall_count = #{allcallCount,jdbcType=INTEGER},
+      succqc_count = #{succqcCount,jdbcType=INTEGER},
+      succsecqc_count = #{succsecqcCount,jdbcType=INTEGER},
+      succaccount_count = #{succaccountCount,jdbcType=INTEGER},
+      complain_count = #{complainCount,jdbcType=INTEGER},
+      voice_normal = #{voiceNormal,jdbcType=INTEGER},
+      voice_exception = #{voiceException,jdbcType=INTEGER},
+      quality_service = #{qualityService,jdbcType=INTEGER},
+      error_endresult = #{errorEndresult,jdbcType=INTEGER},
+      credit_score = #{creditScore,jdbcType=INTEGER},
+      skills = #{skills,jdbcType=VARCHAR},
+      business_skills = #{businessSkills,jdbcType=VARCHAR},
+      educational = #{educational,jdbcType=VARCHAR},
+      work_exp = #{workExp,jdbcType=VARCHAR},
+      points = #{points,jdbcType=INTEGER},
+      nowpoints = #{nowpoints,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      rank = #{rank,jdbcType=INTEGER},
+      person_info = #{personInfo,jdbcType=VARCHAR},
+      all_loginTime = #{allLogintime,jdbcType=BIGINT},
+      all_callTime = #{allCalltime,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      datatime = #{datatime,jdbcType=DATE},
+      screen_busytime = #{screenBusytime,jdbcType=BIGINT},
+      hand_busytime = #{handBusytime,jdbcType=BIGINT},
+      provinceId = #{provinceid,jdbcType=INTEGER},
+      p_agentId = #{pAgentid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
